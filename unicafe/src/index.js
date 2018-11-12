@@ -13,7 +13,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        {console.log(this.state)}
         <h1>Anna palautetta</h1>
         <div>
           <Button label={'hyvä'} onClick={this.handleClick('good')} />
