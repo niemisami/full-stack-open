@@ -1,49 +1,48 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
 
-const App = () => {
-  const kurssi = {
+const kurssit = [
+  {
     nimi: 'Half Stack -sovelluskehitys',
+    id: 1,
     osat: [
       {
         nimi: 'Reactin perusteet',
-        tehtavia: 10
+        tehtavia: 10,
+        id: 1
       },
       {
         nimi: 'Tiedonvälitys propseilla',
-        tehtavia: 7
+        tehtavia: 7,
+        id: 2
       },
       {
         nimi: 'Komponenttien tila',
-        tehtavia: 14
+        tehtavia: 14,
+        id: 3
+      }
+    ]
+  },
+  {
+    nimi: 'Node.js',
+    id: 2,
+    osat: [
+      {
+        nimi: 'Routing',
+        tehtavia: 3,
+        id: 1
+      },
+      {
+        nimi: 'Middlewaret',
+        tehtavia: 7,
+        id: 2
       }
     ]
   }
-
-  return (
-    <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto osat={kurssi.osat} />
-      <Yhteensa osat={kurssi.osat} />
-    </div>
-  )
-}
-
-const Otsikko = ({ kurssi }) => <h1>{kurssi.name}</h1>
-const Sisalto = ({ osat }) => (
-  <div>
-    {osat.map(osa => <Osa key={osa.nimi} osa={osa} />)}
-  </div>
-)
-const Yhteensa = ({ osat }) => {
-  let yhteensa = 0
-  osat.forEach(osa => yhteensa += osa.tehtavia)
-  return < p > yhteensä {yhteensa} tehtävää</p>
-}
-
-const Osa = ({ osa }) => <p>{osa.nimi} {osa.tehtavia}</p>
+]
 
 ReactDOM.render(
-  <App />,
+  <App kurssit={kurssit}/>,
   document.getElementById('root')
 )
