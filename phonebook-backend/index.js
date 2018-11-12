@@ -1,8 +1,21 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 const app = express()
 
 app.use(bodyParser.json())
+
+morgan.token('body', (req) => JSON.stringify(req.body))
+app.use(morgan(function(tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.body(req),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+}))
 
 let persons = [
   {
@@ -41,7 +54,7 @@ app.get('/api/persons/:id', (req, res) => {
   }
 })
 
-app.post('/persons', (req, res) => {
+app.post('/api/persons', (req, res) => {
   const generatedId = Math.random() * Number.MAX_SAFE_INTEGER
   const person = req.body
   if(!person.name || !person.number) {
@@ -69,6 +82,10 @@ app.get('/info', (req, res) => {
   ${new Date().toISOString()} `
   res.send(message)
 })
+
+const error = (req, res) => {
+  res.status(404).send({ error: 'unknown endpoint' })
+}
 
 const PORT = 3001
 app.listen(PORT, () => {
