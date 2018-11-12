@@ -1,9 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cors())
 
 morgan.token('body', (req) => JSON.stringify(req.body))
 app.use(morgan(function(tokens, req, res) {
@@ -58,10 +60,10 @@ app.post('/api/persons', (req, res) => {
   const generatedId = Math.random() * Number.MAX_SAFE_INTEGER
   const person = req.body
   if(!person.name || !person.number) {
-    return res.status(400).end({ error: 'name or number is missing' })
+    return res.status(400).json({ error: 'name or number is missing' })
   }
   if(persons.find(existingPerson => existingPerson.name === person.name)) {
-    return res.status(400).end({ error: 'person already exists' })
+    return res.status(400).json({ error: 'person already exists' })
   }
 
   person.id = generatedId
@@ -87,7 +89,7 @@ const error = (req, res) => {
   res.status(404).send({ error: 'unknown endpoint' })
 }
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
