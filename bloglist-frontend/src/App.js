@@ -32,7 +32,7 @@ class App extends React.Component {
         blogService.setToken(user.token)
       }
     } catch(error) {
-      this.addNotification(error, notificationTypes.ERROR)
+      this.addNotification(error.message, notificationTypes.ERROR)
     }
   }
 
@@ -68,7 +68,7 @@ class App extends React.Component {
       this.setState({ blogs: this.state.blogs.concat(blog) })
       this.addNotification(`Successfully added blog ${blog.title} `)
     } catch(error) {
-      this.addNotification(error, notificationTypes.ERROR)
+      this.addNotification(error.message, notificationTypes.ERROR)
     }
   }
 
@@ -77,6 +77,7 @@ class App extends React.Component {
   }
 
   addNotification = (message, notificationType = notificationTypes.NORMAL) => {
+    console.log(message, notificationType)
     this.setState({ notificationMessage: message, notificationType })
     setTimeout(() => this.setState(() => ({ notificationMessage: null, notificationType: null })), 5000)
   }
@@ -94,7 +95,7 @@ class App extends React.Component {
           .concat(updatedBlog)
       })
     } catch(error) {
-      this.addNotification(error, notificationTypes.ERROR)
+      this.addNotification(error.message, notificationTypes.ERROR)
 
     }
   }
@@ -107,7 +108,7 @@ class App extends React.Component {
           .filter(blog => blog.id !== removedBlock.id)
       })
     } catch(error) {
-      this.addNotification(error, notificationTypes.ERROR)
+      this.addNotification(error.message, notificationTypes.ERROR)
     }
   }
 
