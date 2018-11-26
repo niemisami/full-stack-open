@@ -21,7 +21,6 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-
       const blogs = await blogService.getAll()
       this.setState({ blogs })
 
@@ -77,7 +76,6 @@ class App extends React.Component {
   }
 
   addNotification = (message, notificationType = notificationTypes.NORMAL) => {
-    console.log(message, notificationType)
     this.setState({ notificationMessage: message, notificationType })
     setTimeout(() => this.setState(() => ({ notificationMessage: null, notificationType: null })), 5000)
   }

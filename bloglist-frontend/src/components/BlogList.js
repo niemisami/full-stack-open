@@ -11,13 +11,13 @@ class BlogList extends PureComponent {
   render() {
     const { blogs } = this.props
     return blogs.map(blog =>
-      <Blog
-        key={blog.id}
-        blog={blog}
-        onLikeClick={this.onLikeClick(blog)}
-        onRemoveClick={this.onRemoveClick(blog)}
-        showRemove={!!blog.user || !!storageService.getItem('user')}
-      />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          onLikeClick={this.onLikeClick(blog)}
+          onRemoveClick={this.onRemoveClick(blog)}
+          showRemove={!!blog.user || !!storageService.getItem('user')}
+        />
     )
   }
 

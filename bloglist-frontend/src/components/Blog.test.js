@@ -2,23 +2,22 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import Blog from './Blog'
 
-describe.only('<Blog />', () => {
-  it('renders content', () => {
-    const blog = {
-      title: 'Clean code',
-      author: 'Robert C. Martin',
-      url: 'wwww.robert.c.ma',
-      likes: 10,
-      user: {
-        name: 'Sami'
-      }
+describe('<Blog />', () => {
+  const blog = {
+    title: 'Clean code',
+    author: 'Robert C. Martin',
+    url: 'wwww.robert.c.ma',
+    likes: 10,
+    user: {
+      name: 'Sami'
     }
-
+  }
+  it('renders content', () => {
     const blogComponent = shallow(
       <Blog
         blog={blog}
-        onRemoveClick={() => {}}
-        onLikeClick={() => {}}
+        onRemoveClick={() => { }}
+        onLikeClick={() => { }}
       />
     )
     const contentDiv = blogComponent.find('.blog-wrapper')
@@ -27,21 +26,11 @@ describe.only('<Blog />', () => {
   })
 
   it('clicking the blog displays details', () => {
-    const blog = {
-      title: 'Clean code',
-      author: 'Robert C. Martin',
-      url: 'wwww.robert.c.ma',
-      likes: 10,
-      user: {
-        name: 'Sami'
-      }
-    }
-
     const blogComponent = shallow(
       <Blog
         blog={blog}
-        onRemoveClick={() => {}}
-        onLikeClick={() => {}}
+        onRemoveClick={() => { }}
+        onLikeClick={() => { }}
       />)
     const blogWrapperDiv = blogComponent.find('.blog-wrapper')
     blogWrapperDiv.simulate('click')
