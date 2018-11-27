@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const Menu = () => (
   <div style={menuStyle}>
@@ -10,7 +11,9 @@ const Menu = () => (
 )
 const menuStyle = {
   backgroundColor: '#1565c0',
-  color: 'white'
+  color: 'white',
+  borderRadius: '4px',
+  overflow: 'hidden'
 }
 const navItemStyle = {
   padding: '1rem',
@@ -24,10 +27,11 @@ const navItemActiveStyle = {
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
-    <ul>
+    <ul className='list-group'>
       {anecdotes.map(anecdote => (
         <li
-          key={anecdote.id} >
+          key={anecdote.id}
+          className='list-group-item'>
           <Link to={`/anecdotes/${anecdote.id}`}>
             {anecdote.content}
           </Link>
@@ -45,15 +49,29 @@ const AnecdoteDetails = ({ anecdote }) => (
 
 const About = () => (
   <div>
-    <h2>About anecdote app</h2>
-    <p>According to Wikipedia:</p>
+    <Row>
+      <Col>
+        <h2>About anecdote app</h2>
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <p>According to Wikipedia:</p>
 
-    <em>An anecdote is a brief, revealing account of an individual person or an incident.
-      Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
-      such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
+        <em>An anecdote is a brief, revealing account of an individual person or an incident.
+          Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
+          such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
       An anecdote is "a story with a point."</em>
 
-    <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
+        <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
+      </Col>
+      <Col className='col-6 col-md-3'>
+        <img
+          alt='Uncle Bob' src='https://upload.wikimedia.org/wikipedia/commons/e/ee/Robert_Cecil_Martin.png'
+          className="img-fluid"
+        />
+      </Col>
+    </Row>
   </div>
 )
 
@@ -93,22 +111,22 @@ class CreateNew extends React.Component {
   render() {
     return (
       <div>
-        <h2>create a new anecdote</h2>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            content
-            <input name='content' value={this.state.content} onChange={this.handleChange} />
-          </div>
-          <div>
-            author
-            <input name='author' value={this.state.author} onChange={this.handleChange} />
-          </div>
-          <div>
-            url for more info
-            <input name='info' value={this.state.info} onChange={this.handleChange} />
-          </div>
-          <button>create</button>
-        </form>
+        <h2>Create a new anecdote</h2>
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup>
+            <Label>Content</Label>
+            <Input name='content' value={this.state.content} onChange={this.handleChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label>Author</Label>
+            <Input name='author' value={this.state.author} onChange={this.handleChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label>URL for more info</Label>
+            <Input name='info' value={this.state.info} onChange={this.handleChange} />
+          </FormGroup>
+          <Button color='success'>create</Button>
+        </Form>
       </div>
     )
 
@@ -167,33 +185,39 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <h1>Software anecdotes</h1>
         <Router>
           <div>
             <Menu />
             {this.state.notification.length > 0 && <p style={notificationStyle}>{this.state.notification}</p>}
-            <Route exact path='/' render={() =>
-              <AnecdoteList anecdotes={this.state.anecdotes} />
-            } />
-            <Route path='/create' render={({ history }) =>
-              <CreateNew
-                history={history}
-                addNew={this.addNew} />} />
-            <Route path='/about' render={() => <About />} />
-            <Route path='/anecdotes/:id' render={({ match }) =>
-              <AnecdoteDetails
-                anecdote={this.anecdoteById(match.params.id)}
-              />} />
+
+            <Row className='my-3'>
+              <Col>
+                <Route exact path='/' render={() =>
+                  <AnecdoteList anecdotes={this.state.anecdotes} />
+                } />
+                <Route path='/create' render={({ history }) =>
+                  <CreateNew
+                    history={history}
+                    addNew={this.addNew} />} />
+                <Route path='/about' render={() => <About />} />
+                <Route path='/anecdotes/:id' render={({ match }) =>
+                  <AnecdoteDetails
+                    anecdote={this.anecdoteById(match.params.id)}
+                  />} />
+              </Col>
+            </Row>
           </div>
         </Router>
         <Footer />
-      </div>
+      </Container>
     );
   }
 }
 
 const notificationStyle = {
+  marginTop: '1rem',
   padding: '1rem',
   borderRadius: '4px',
   boxshadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
