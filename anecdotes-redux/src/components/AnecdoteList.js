@@ -2,17 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import AnecdoteFilter from './AnecdoteFilter'
-import { vote, showNotification, clearNotification } from '../actionCreators'
-import anedcoteService from '../services/anecdotes'
+import { vote } from '../actionCreators'
 
 class AnecdoteList extends React.Component {
   vote = anecdote => async () => {
-    const { vote, showNotification, clearNotification } = this.props
-    const withVote = { ...anecdote, votes: anecdote.votes + 1 }
-    const updatedAnecdote = await anedcoteService.update(withVote)
-    vote(updatedAnecdote.id)
-    showNotification('Liked: ' + anecdote.content)
-    setTimeout(() => clearNotification(), 5000)
+    this.props.vote(anecdote)
   }
 
   render() {
@@ -35,9 +29,7 @@ class AnecdoteList extends React.Component {
   }
   static propTypes = {
     anecdotes: PropTypes.array,
-    vote: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
-    clearNotification: PropTypes.func.isRequired
+    vote: PropTypes.func.isRequired
   }
 }
 
@@ -52,9 +44,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispacthToProps = {
-  vote,
-  showNotification,
-  clearNotification
+  vote
 }
 
 export default connect(mapStateToProps, mapDispacthToProps)(AnecdoteList)

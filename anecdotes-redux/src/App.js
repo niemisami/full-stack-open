@@ -5,13 +5,11 @@ import { connect } from 'react-redux'
 import Notification from './components/Notification'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
-import anecdoteService from './services/anecdotes'
 import { anecdoteInitialization } from './actionCreators'
 
 class App extends PureComponent {
   componentDidMount = async () => {
-    const anecdotes = await anecdoteService.getAll()
-    this.props.anecdoteInitialization(anecdotes)
+    this.props.anecdoteInitialization()
   }
   render() {
     return (
