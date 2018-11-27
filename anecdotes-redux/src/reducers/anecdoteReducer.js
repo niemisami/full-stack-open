@@ -22,10 +22,7 @@ const sortByVotes = anecdotes => anecdotes.sort((a, b) => b.votes - a.votes)
 const initialState = sortByVotes(anecdotesAtStart.map(asObject))
 
 const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
-
-  if(action.type === 'NEW_ANECDOTE') {
+  if(action.type === 'CREATE') {
     return state.concat(asObject(action.data))
   } else if(action.type === 'VOTE') {
     return sortByVotes(state.map(anecdote =>
