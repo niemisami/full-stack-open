@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import AnecdoteFilter from './AnecdoteFilter'
 import { vote, showNotification, clearNotification } from '../actionCreators'
+import anedcoteService from '../services/anecdotes'
 
 class AnecdoteList extends React.Component {
-  vote = anecdote => () => {
+  vote = anecdote => async () => {
     const { vote, showNotification, clearNotification } = this.props
-    vote(anecdote.id)
+    const withVote = { ...anecdote, votes: anecdote.votes + 1 }
+    const updatedAnecdote = await anedcoteService.update(withVote)
+    vote(updatedAnecdote.id)
     showNotification('Liked: ' + anecdote.content)
     setTimeout(() => clearNotification(), 5000)
   }

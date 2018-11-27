@@ -2,6 +2,10 @@ export const createAnecdote = (anecdote) => ({
   type: 'CREATE',
   data: anecdote
 })
+export const anecdoteInitialization = anecdotes => ({
+  type: 'INIT_ANECDOTES',
+  data: anecdotes
+})
 export const vote = id => ({
   type: 'VOTE',
   data: id
