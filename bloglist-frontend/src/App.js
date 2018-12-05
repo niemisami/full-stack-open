@@ -21,15 +21,16 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-      const blogs = await blogService.getAll()
-      this.setState({ blogs })
-
       const loggedUserJson = storageService.getItem('user')
       if(loggedUserJson) {
         const user = JSON.parse(loggedUserJson)
         this.setState({ user })
         blogService.setToken(user.token)
       }
+
+      const blogs = await blogService.getAll()
+      this.setState({ blogs })
+
     } catch(error) {
       this.addNotification(error.message, notificationTypes.ERROR)
     }
@@ -73,6 +74,7 @@ class App extends React.Component {
 
   handleLogOut = () => {
     this.setState({ user: null })
+    storageService.removeItem('user')
   }
 
   addNotification = (message, notificationType = notificationTypes.NORMAL) => {

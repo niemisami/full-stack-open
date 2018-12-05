@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { notificationTypes } from '../constants'
 
 const generateStyle = color => ({
   border: `1px solid ${color}`,
   padding: '1rem',
   color
 })
+
 const Notification = ({ message, notificationType }) => {
   if(message === null) {
     return null
@@ -24,9 +26,6 @@ Notification.propTypes = {
   notificationType: PropTypes.number
 }
 
-export const notificationTypes = {
-  NORMAL: 0,
-  ERROR: 1
-}
+
 
 export default Notification
