@@ -21,29 +21,51 @@ module.exports = {
     "jest"
   ],
   "rules": {
-    "indent": [
+    "keyword-spacing": [
       "error",
-      2
+      {
+        "after": true,
+        "before": true,
+        "overrides": {
+          "if": {
+            "after": false
+          },
+          "for": {
+            "after": false
+          },
+          "while": {
+            "after": false
+          },
+          "switch": {
+            "after": false
+          },
+          "catch": {
+            "after": false
+          }
+        }
+      }
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
+    "space-before-function-paren": [
       "error",
       "never"
     ],
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-      "error", "always"
+    "generator-star-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
     ],
-    "arrow-spacing": [
-      "error", { "before": true, "after": true }
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
     ],
     "no-console": 0
   }
