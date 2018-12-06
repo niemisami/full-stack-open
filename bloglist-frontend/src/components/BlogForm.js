@@ -1,50 +1,41 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { create } from '../actions/blogActions'
 
 class BlogForm extends PureComponent {
-
-  state = {
-    title: '',
-    author: '',
-    url: ''
-  }
-
-  handleInputChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
   onSubmit = event => {
-    event.preventDefault() 
-    this.props.onSubmit(this.state)
+    event.preventDefault()
+    const blog = {
+      title: event.target.title.value,
+      author: event.target.author.value,
+      url: event.target.url.value
+    }
+    this.props.create(blog)
+    event.target.title.value = ''
+    event.target.author.value = ''
+    event.target.url.value = ''
   }
 
   render() {
-    const {  title, author, url } = this.state
+    // const { title, author, url } = this.state
     return <>
       <h2>Add new blog</h2>
       <form onSubmit={this.onSubmit}>
         <div>
           <label htmlFor='title' >Title: </label>
           <input
-            name='title'
-            value={title}
-            onChange={this.handleInputChange} />
+            name='title' />
         </div>
         <div>
           <label htmlFor='author' >Author: </label>
           <input
-            name='author'
-            value={author}
-            onChange={this.handleInputChange} />
+            name='author'/>
         </div>
         <div>
           <label htmlFor='url' >URL: </label>
           <input
-            name='url'
-            value={url}
-            onChange={this.handleInputChange} />
+            name='url' />
         </div>
         <button type="submit">Save</button>
       </form>
@@ -52,8 +43,12 @@ class BlogForm extends PureComponent {
   }
 
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    create: PropTypes.func.isRequired
   }
 }
 
-export default BlogForm
+const mapDispatchToProps = ({
+  create
+})
+
+export default connect(null, mapDispatchToProps)(BlogForm)

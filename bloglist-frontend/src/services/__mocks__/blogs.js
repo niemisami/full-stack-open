@@ -1,5 +1,3 @@
-let token
-
 const blogs = [
   {
     id: '5a422a851b54a676234d17f7',

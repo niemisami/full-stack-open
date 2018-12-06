@@ -2,11 +2,8 @@ import React from 'react'
 import { mount } from 'enzyme'
 
 import App from './App'
-import BlogList from './components/BlogList'
 import Blog from './components/Blog'
-import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
-import storageService from './services/storage'
 
 describe('<App />', () => {
 

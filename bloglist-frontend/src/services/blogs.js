@@ -9,7 +9,7 @@ const getAll = async token => {
   return response.data
 }
 
-const createNew = async (blog, token) => {
+const createNew = async(blog, token) => {
   const config = {
     headers: { 'Authorization': `bearer ${token}` }
   }
@@ -17,7 +17,7 @@ const createNew = async (blog, token) => {
   return response.data
 }
 
-const update = async (blog, token) => {
+const update = async(blog, token) => {
   const config = {
     headers: { 'Authorization': `bearer ${token}` }
   }
@@ -25,7 +25,7 @@ const update = async (blog, token) => {
   return response.data
 }
 
-const remove = async (blog, token) => {
+const remove = async(blog, token) => {
   const config = {
     headers: { 'Authorization': `bearer ${token}` }
   }

@@ -1,23 +1,19 @@
 
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Blog from './Blog'
-import storageService from '../services/storage'
+import { fetchAll } from '../actions/blogActions'
 
 class BlogList extends PureComponent {
-  onLikeClick = blog => () => this.props.onLikeClick(blog)
-  onRemoveClick = blog => () => this.props.onRemoveClick(blog)
+  componentDidMount = () => {
+    this.props.fetchAll()
+  }
 
   render() {
     const { blogs } = this.props
     return blogs.map(blog =>
-        <Blog
-          key={blog.id}
-          blog={blog}
-          onLikeClick={this.onLikeClick(blog)}
-          onRemoveClick={this.onRemoveClick(blog)}
-          showRemove={!!blog.user || !!storageService.getItem('user')}
-        />
+      <Blog key={blog.id} blogId={blog.id} />
     )
   }
 
@@ -30,11 +26,23 @@ class BlogList extends PureComponent {
       user: PropTypes.shape({
         name: PropTypes.string.isRequired
       })
-    })),
-    onLikeClick: PropTypes.func.isRequired,
-    onRemoveClick: PropTypes.func.isRequired
+    }))
+  }
+  static propTypes = {
+    blogs: PropTypes.array.isRequired,
+    fetchAll: PropTypes.func.isRequired
   }
 }
 
-export default BlogList
+const mapStateToProps = (state) => ({
+  blogs: sortByLikes(state.blogs)
+})
+
+const mapDispatchToProps = {
+  fetchAll
+}
+
+const sortByLikes = blogs => blogs.sort((blogA, blogB) => blogB.likes - blogA.likes)
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogList)
 
