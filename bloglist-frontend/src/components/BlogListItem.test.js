@@ -1,8 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Blog from './Blog'
+import BlogListItem from './BlogListItem'
 
-describe('<Blog />', () => {
+describe('<BlogListItem />', () => {
   const blog = {
     title: 'Clean code',
     author: 'Robert C. Martin',
@@ -14,10 +14,8 @@ describe('<Blog />', () => {
   }
   it('renders content', () => {
     const blogComponent = shallow(
-      <Blog
+      <BlogListItem
         blog={blog}
-        onRemoveClick={() => { }}
-        onLikeClick={() => { }}
       />
     )
     const contentDiv = blogComponent.find('.blog-wrapper')
@@ -27,7 +25,7 @@ describe('<Blog />', () => {
 
   it('clicking the blog displays details', () => {
     const blogComponent = shallow(
-      <Blog
+      <BlogListItem
         blog={blog}
         onRemoveClick={() => { }}
         onLikeClick={() => { }}

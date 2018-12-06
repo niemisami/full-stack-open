@@ -7,14 +7,13 @@ export const notifyWith = (message, notificationType, seconds = 5) => async disp
   }, seconds * 1000)
 }
 
-export const showNotification = (message, notificationType) =>
-  console.log(notificationType) || ({
-    type: actions.NOTIFICATION_SHOW,
-    data: {
-      message,
-      notificationType
-    }
-  })
+export const showNotification = (message, notificationType) => ({
+  type: actions.NOTIFICATION_SHOW,
+  data: {
+    message,
+    notificationType
+  }
+})
 
 export const clearNotification = () => ({
   type: actions.NOTIFICATION_CLEAR

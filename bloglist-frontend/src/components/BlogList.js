@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Blog from './Blog'
+import BlogListItem from './BlogListItem'
 import { fetchAll } from '../actions/blogActions'
 
 class BlogList extends PureComponent {
@@ -12,9 +12,12 @@ class BlogList extends PureComponent {
 
   render() {
     const { blogs } = this.props
-    return blogs.map(blog =>
-      <Blog key={blog.id} blogId={blog.id} />
-    )
+    return <>
+      <h2>Blogs</h2>
+      {blogs.map(blog =>
+        <BlogListItem key={blog.id} blog={blog} />
+      )}
+    </>
   }
 
   static propTypes = {
