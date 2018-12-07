@@ -18,7 +18,6 @@ class BlogForm extends PureComponent {
   }
 
   render() {
-    // const { title, author, url } = this.state
     return <>
       <h2>Add new blog</h2>
       <form onSubmit={this.onSubmit}>

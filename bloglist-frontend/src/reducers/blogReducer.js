@@ -14,7 +14,7 @@ const reducer = (state = [], action) => {
 
     case actions.BLOG_DELETE:
       return state.filter(blog => blog.id !== action.data.id)
-
+      
     default:
       return state
   }

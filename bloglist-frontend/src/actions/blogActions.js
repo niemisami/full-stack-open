@@ -61,3 +61,19 @@ export const addLike = blog => async(dispatch) => {
     dispatch(notifyWith(`Error adding like to a blog ${blog.title}`, notificationTypes.ERROR))
   }
 }
+
+export const addComment = (blog, comment) => async(dispatch) => {
+  try {
+    if(!comment.length) {
+      return dispatch(notifyWith(`Please write some comment first`, notificationTypes.ERROR))
+    }
+    const blogWithComment = {
+      ...blog,
+      comments: blog.comments.concat(comment)
+    }
+    dispatch(update(blogWithComment, `Comment ${comment} added to ${blog.title}`))
+  } catch(error) {
+    console.error(error)
+    dispatch(notifyWith(`Error adding comment to a blog ${blog.title}`, notificationTypes.ERROR))
+  }
+}

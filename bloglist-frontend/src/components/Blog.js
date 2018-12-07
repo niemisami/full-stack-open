@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addLike, remove } from '../actions/blogActions'
+import { addLike, remove, addComment } from '../actions/blogActions'
+import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 
-function Blog({ blog, addLike, remove, showRemove }) {
+function Blog({ blog, addLike, addComment, remove, showRemove }) {
   return !blog
     ? <p>Blog not found</p>
     : (
@@ -22,6 +24,8 @@ function Blog({ blog, addLike, remove, showRemove }) {
             className='remove-button'
             onClick={() => remove(blog)}>Remove</button>
         }
+        <CommentList blog={blog} />
+        <CommentForm blog={blog} />
       </div>
     )
 }
@@ -34,6 +38,7 @@ Blog.propTypes = {
     user: PropTypes.object
   }),
   addLike: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
   showRemove: PropTypes.bool
 }
@@ -51,6 +56,7 @@ const mapStateToProps = (state, { blogId }) => {
 
 const mapDispatchToProps = {
   addLike,
+  addComment,
   remove
 }
 
