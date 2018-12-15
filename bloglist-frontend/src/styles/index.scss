@@ -1,0 +1,71 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./animations";
+$bg-color-light: #1fabc00f;
+$bg-color-dark: #1565c01a;
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: $bg-color-dark;
+}
+
+.app-title {
+  display: inline-block;
+  padding: 1rem;
+  border: 2px solid #1565c0;
+  &.smaller {
+    color: #1565c0;
+  }
+  .svg-icon {
+    fill: #1565c0;
+    transform: rotate(10deg);
+  }
+}
+
+.login-container {
+  margin: 2rem 0;
+}
+
+form {
+  margin: 2rem 0;
+  .form-group {
+    margin: 1.5rem 0;
+  }
+}
+
+.form-input {
+  padding: 1.2rem 1rem;
+}
+
+.nav-menu {
+  background-color: #1565c0;
+  color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  >.nav-item {
+    padding: 1rem;
+    display: inline-block;
+    color: white;
+    &.active {
+      background-color: #5e92f3
+    }
+  }
+}
+
+.svg-icon {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.notification {
+  position: absolute;
+  border: 2px solid #388e3c;
+  padding: 1rem;
+  color: #388e3c;
+  display: inline-block;
+  fill: #388e3c;
+  &.error {
+    border-color: #d32f2f;
+    color: #d32f2f;
+    fill: #d32f2f;
+  }
+}

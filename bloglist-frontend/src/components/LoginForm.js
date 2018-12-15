@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
 import { login } from '../actions/authActions'
+import AppTitle from '../components/AppTitle'
 
 const LoginForm = ({ login }) => {
   const handleLoginFormSubmit = event => {
@@ -15,26 +17,35 @@ const LoginForm = ({ login }) => {
     event.target.password.value = ''
   }
   return (
-    <div>
-      <h1 className='header'>Log in to application</h1>
-      <form onSubmit={handleLoginFormSubmit}>
-        <div>
-          <label htmlFor='username' >Name: </label>
-          <input
-            name='username' />
+    <Row>
+      <Col sm='12' md={{ size: 6, offset: 3 }}>
+        <AppTitle isSmall />
+        <div  className='login-container reveal-1'>
+          <h3 className='header'>Log in to learn and share
+        </h3>
+          <Form onSubmit={handleLoginFormSubmit} >
+            <FormGroup>
+              <Input
+                className='form-input'
+                placeholder='Username'
+                name='username' />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                className='form-input'
+                placeholder='password'
+                type='password'
+                name='password' />
+            </FormGroup>
+            <Button outline color='primary' type='submit'>Log in</Button>
+          </Form>
         </div>
-        <div>
-          <label htmlFor='password' >Password: </label>
-          <input
-            name='password' />
-        </div>
-        <button type="submit">Log in</button>
-      </form>
-    </div>
+      </Col>
+    </Row >
   )
 }
 
-LoginForm.propTypes ={
+LoginForm.propTypes = {
   login: PropTypes.func.isRequired
 }
 

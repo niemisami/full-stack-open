@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Button } from 'reactstrap'
 import { addLike, remove, addComment } from '../actions/blogActions'
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
@@ -9,20 +10,24 @@ function Blog({ blog, addLike, addComment, remove, showRemove }) {
   return !blog
     ? <p>Blog not found</p>
     : (
-      <div>
+      <div className='reveal-1'>
         <h1>{blog.title}</h1>
         <a target='_blank'
           rel='noopener noreferrer'
           href={blog.url}>Read the blog</a>
 
         <div className='blog-details'>
-          {blog.likes} likes <button onClick={() => addLike(blog)}>Like</button>
+          {blog.likes} likes <Button outline color='success' onClick={() => addLike(blog)}>Like</Button>
           {blog.user && `Added by ${blog.user.name}`}<br />
         </div>
         {showRemove &&
-          <button
+          <Button
+            outline
+            color='success'
             className='remove-button'
-            onClick={() => remove(blog)}>Remove</button>
+            onClick={() => remove(blog)}>
+            Remove
+            </Button>
         }
         <CommentList blog={blog} />
         <CommentForm blog={blog} />

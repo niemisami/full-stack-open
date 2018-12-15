@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
 import Header from './components/Header';
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
@@ -12,6 +13,9 @@ import UserList from './components/UserList';
 import User from './components/User';
 
 import { logout, checkAuth } from './actions/authActions'
+
+import './styles/index.scss'
+
 class App extends React.Component {
 
   componentDidMount = () => {
@@ -25,7 +29,7 @@ class App extends React.Component {
   render() {
     const { user } = this.props
     return (
-      <div>
+      <Container>
         <Notification />
         {user.token == null
           ? <LoginForm />
@@ -47,7 +51,7 @@ class App extends React.Component {
             </>
           </Router>
         }
-      </div>
+      </Container>
     )
   }
   static propTypes = {

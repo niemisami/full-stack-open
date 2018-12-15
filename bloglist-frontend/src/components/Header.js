@@ -1,36 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 import { connect } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { logout } from '../actions/authActions'
+import AppTitle from './AppTitle';
 
-const Header = ({ user }) => {
+const Header = ({ user, logout }) => {
   return (
-    <div>
+    <div className='nav-menu'>
       <Link to='/'>
-        <h1 className='header'>
-          BLOG APP
-      </h1>
+        <AppTitle />
       </Link>
       <Nav />
-      <p>{`${user.name} logged in`} <button onClick={logout}>Log out</button></p>
-      <p>
-        <Link to='/blogs/new' tag='button' >Create new blog</Link>
-      </p>
+      <p>{`${user.name} logged in`} <Button outline color='secondary' onClick={logout}>Log out</Button></p>
+      <Link to='/blogs/new' tag='button' >
+        <Button>Create new blog</Button>
+      </Link>
     </div>
   )
 }
 
 const Nav = () => (
-  <div >
-    <NavLink exact to='/'>Blogs</NavLink>&nbsp;
-    <NavLink to='/users'>Users</NavLink>&nbsp;
+  <div>
+    <NavLink className='nav-item' activeClassName='active' exact to='/'>Blogs</NavLink>&nbsp;
+    <NavLink className='nav-item' activeClassName='active' to='/users'>Users</NavLink>&nbsp;
   </div>
 )
 
 Header.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  logout: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

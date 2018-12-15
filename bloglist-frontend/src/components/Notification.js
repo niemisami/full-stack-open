@@ -2,22 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { notificationTypes } from '../constants'
-
-const generateStyle = color => ({
-  border: `1px solid ${color}`,
-  padding: '1rem',
-  color
-})
+import { ReactComponent as Exclamation } from '../icons/exclamation-outline.svg'
+import { ReactComponent as Checkmark } from '../icons/checkmark-outline.svg'
 
 const Notification = ({ message, show, notificationType }) => {
   if(!show) {
     return null
   }
-  const styles = generateStyle(notificationType === notificationTypes.NORMAL ? '#388e3c' : '#d32f2f')
-  const className = notificationType === notificationTypes.NORMAL ? 'normal' : 'error'
+  const isNormal = notificationType === notificationTypes.NORMAL
+  const className = isNormal ? '' : ' error'
+  const Icon = isNormal ? Checkmark : Exclamation
   return (
-    <div style={styles} className={className}>
-      {message}
+    <div className={`notification reveal-down-1 ${className}`}>
+      <Icon width='22' height='22' className='svg-icon' /> {message}
     </div>
   )
 }
