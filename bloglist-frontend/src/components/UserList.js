@@ -13,10 +13,12 @@ class UserList extends PureComponent {
   render() {
     const { users } = this.props
     return <>
-      <h2>Users</h2>
-      {users.map(user =>
-        <UserListItem key={user.id} user={user} />
-      )}
+      <h2 className='reveal-down-1'>Users</h2>
+      <div className='reveal-1 reveal-delay'>
+        {users.map(user =>
+          <UserListItem key={user.id} user={user} />
+        )}
+      </div>
     </>
   }
 

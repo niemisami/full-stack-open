@@ -2,15 +2,10 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const style = {
-  padding: '1rem',
-  borderBottom: '1px solid black'
-}
-
 class BlogListItem extends PureComponent {
   render() {
     const { blog } = this.props
-    return <div className='blog-wrapper' onClick={this.onClick} style={style} >
+    return <div className='list-item' onClick={this.onClick} >
        <Link to={`/blogs/${blog.id}`}>
         {blog.title} {blog.author}
       </Link>

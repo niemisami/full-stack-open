@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Container } from 'reactstrap'
 import Header from './components/Header';
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
@@ -29,7 +29,7 @@ class App extends React.Component {
   render() {
     const { user } = this.props
     return (
-      <Container>
+      <Container className='base'>
         <Notification />
         {user.token == null
           ? <LoginForm />
@@ -38,15 +38,17 @@ class App extends React.Component {
               <Header />
               <>
                 <Route path='/' exact component={BlogList} />
-                <Route path='/blogs/new' component={BlogForm} />
-                <Route path='/blogs/:blogId' render={({ match }) => (
-                  <Blog blogId={match.params.blogId} />
+                <Switch >
+                  <Route path='/blogs/new' exact component={BlogForm} />
+                  <Route path='/blogs/:blogId' render={({ match }) => (
+                    <Blog blogId={match.params.blogId} />
                   )} />
-                  <Route path='/blogs' component={BlogList} />
+                </Switch>
+                <Route path='/blogs' component={BlogList} />
                 <Route path='/users/:userId' render={({ match }) => (
                   <User userId={match.params.userId} />
-                  )} />
-                  <Route path='/users' component={UserList} />
+                )} />
+                <Route path='/users' component={UserList} />
               </>
             </>
           </Router>

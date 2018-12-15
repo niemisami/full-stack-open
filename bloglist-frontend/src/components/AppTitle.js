@@ -2,24 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ReactComponent as Book } from '../icons/book.svg'
 
-const AppTitle = ({ title = 'BlogHold', isSmall }) => {
-  const TitleComponent = isSmall ? Small : Large
+const AppTitle = ({ title = 'BlogHold' }) => {
   return (
-    <TitleComponent>
+    <Title>
       {title}
-    </TitleComponent>
+    </Title>
   )
 }
-
-const Large = ({ children }) => <h1 className='app-title reveal-down-1'>
-  {children}
-  <Book width='22' height='22' className='svg-icon' /></h1>
-Large.propTypes = { children: PropTypes.string.isRequired }
-
-const Small = ({ children }) => <h4 className='app-title reveal-down-1 smaller'>
-  {children}
-  <Book width='22' height='22' className='svg-icon' /></h4>
-Small.propTypes = { children: PropTypes.string.isRequired }
+const Title = ({ children }) =>
+  <h4 className='app-title reveal-down-1 smaller'>
+    {children}
+    <Book width='22' height='22' className='svg-icon' />
+  </h4>
+Title.propTypes = { children: PropTypes.string.isRequired }
 
 
 

@@ -11,7 +11,7 @@ const reducer = (state = {}, action) => {
       const [key, newComment] = Object.entries(action.data)[0]
       return {
         ...state,
-        [key]: state[key].concat(newComment)
+        [key]: state[key] ? state[key].concat(newComment) : [newComment]
       }
     default:
       return state

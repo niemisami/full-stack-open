@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Row, Col, Button, Form, FormGroup, Input } from 'reactstrap'
 import { create } from '../actions/blogActions'
+import { ReactComponent as AddIcon } from '../icons/add-outline.svg'
 
 class BlogForm extends PureComponent {
   onSubmit = event => {
@@ -18,27 +20,34 @@ class BlogForm extends PureComponent {
   }
 
   render() {
-    return <>
-      <h2>Add new blog</h2>
-      <form onSubmit={this.onSubmit}>
-        <div>
-          <label htmlFor='title' >Title: </label>
-          <input
-            name='title' />
-        </div>
-        <div>
-          <label htmlFor='author' >Author: </label>
-          <input
-            name='author'/>
-        </div>
-        <div>
-          <label htmlFor='url' >URL: </label>
-          <input
-            name='url' />
-        </div>
-        <button type="submit">Save</button>
-      </form>
-    </>
+    return <Row className='reveal-1'>
+      <Col className='block' sm='12' md={{ size: 6, offset: 3 }}>
+        <h2>
+          <AddIcon width='22' height='22' className='svg-icon' /> Add new blog
+    </h2>
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup>
+            <Input
+              className='form-input'
+              placeholder='Title'
+              name='title' />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              className='form-input'
+              placeholder='Author'
+              name='author' />
+          </FormGroup>
+          <FormGroup>
+            <Input
+              className='form-input'
+              placeholder='URL'
+              name='url' />
+          </FormGroup>
+          <Button outline color='primary' type="submit">Save</Button>
+        </Form>
+      </Col>
+    </Row>
   }
 
   static propTypes = {

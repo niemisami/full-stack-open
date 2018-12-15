@@ -18,7 +18,7 @@ describe('<BlogListItem />', () => {
         blog={blog}
       />
     )
-    const contentDiv = blogComponent.find('.blog-wrapper')
+    const contentDiv = blogComponent.find('.list-item')
 
     expect(contentDiv.text()).toContain(blog.title)
   })
@@ -30,7 +30,7 @@ describe('<BlogListItem />', () => {
         onRemoveClick={() => { }}
         onLikeClick={() => { }}
       />)
-    const blogWrapperDiv = blogComponent.find('.blog-wrapper')
+    const blogWrapperDiv = blogComponent.find('.list-item')
     blogWrapperDiv.simulate('click')
 
     const blogDetailsDiv = blogComponent.find('.blog-details')

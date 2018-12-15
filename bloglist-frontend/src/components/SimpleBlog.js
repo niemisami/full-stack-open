@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const SimpleBlog = ({ blog, onClick }) => (
-  <div className='blog-wrapper'>
+  <div className='list-item'>
     <div className='blog-content'>
       {blog.title} {blog.author}
     </div>

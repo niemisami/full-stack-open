@@ -17,10 +17,10 @@ export const create = (blog, comment) => async(dispatch, getState) => {
   try {
     const token = getState().auth.token
     const newComment = await commentService.createNew(blog, comment, token)
-    dispatch(notifyWith(`New comment ${newComment.content} for blog ${blog.title} created`, notificationTypes.NORMAL))
+    dispatch(notifyWith(`New comment "${newComment[blog.id].content}" for blog "${blog.title}" created`, notificationTypes.NORMAL))
     dispatch({ type: actions.COMMENT_CREATE, data: newComment })
   } catch(error) {
     console.error(error)
-    dispatch(notifyWith(`Error creating comment ${comment.title}`, notificationTypes.ERROR))
+    dispatch(notifyWith(`Error creating comment "${comment.content}"`, notificationTypes.ERROR))
   }
 }

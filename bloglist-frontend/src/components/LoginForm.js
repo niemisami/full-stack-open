@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import {  Row, Col, Button, Form, FormGroup, Input } from 'reactstrap'
 import { login } from '../actions/authActions'
 import AppTitle from '../components/AppTitle'
 

@@ -21,7 +21,7 @@ export const create = blog => async(dispatch, getState) => {
     dispatch({ type: actions.BLOG_CREATE, data: newBlog })
   } catch(error) {
     console.error(error)
-    dispatch(notifyWith(`Error creating blog ${blog.title}`, notificationTypes.ERROR))
+    dispatch(notifyWith(`Error creating blog "${blog.title}"`, notificationTypes.ERROR))
   }
 }
 
@@ -55,10 +55,10 @@ export const addLike = blog => async(dispatch) => {
       ...blog,
       likes: blog.likes + 1
     }
-    dispatch(update(blogWithNewLike, `Like added to ${blog.title}`))
+    dispatch(update(blogWithNewLike, `Like added to "${blog.title}"`))
   } catch(error) {
     console.error(error)
-    dispatch(notifyWith(`Error adding like to a blog ${blog.title}`, notificationTypes.ERROR))
+    dispatch(notifyWith(`Error adding like to a blog "${blog.title}"`, notificationTypes.ERROR))
   }
 }
 
@@ -71,9 +71,9 @@ export const addComment = (blog, comment) => async(dispatch) => {
       ...blog,
       comments: blog.comments.concat(comment)
     }
-    dispatch(update(blogWithComment, `Comment ${comment} added to ${blog.title}`))
+    dispatch(update(blogWithComment, `Comment "${comment}" added to ${blog.title}`))
   } catch(error) {
     console.error(error)
-    dispatch(notifyWith(`Error adding comment to a blog ${blog.title}`, notificationTypes.ERROR))
+    dispatch(notifyWith(`Error adding comment to a blog "${blog.title}"`, notificationTypes.ERROR))
   }
 }

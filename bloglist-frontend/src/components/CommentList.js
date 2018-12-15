@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Row, Col } from 'reactstrap'
 import { fetchAll } from '../actions/commentActions'
 
 class CommentList extends PureComponent {
@@ -15,11 +16,16 @@ class CommentList extends PureComponent {
   }
 
   render() {
-    return (<div>
-      <h3>Comments</h3>
-      {this.props.comments.map((comment) =>
-        <li key={comment.id}>{comment.content}</li>)}
-    </div>
+    return (
+      <Row className='mt-4'>
+        <Col>
+          <h3>Comments</h3>
+          <ul>
+            {this.props.comments.map((comment) =>
+              <li key={comment.id}>{comment.content}</li>)}
+          </ul>
+        </Col>
+      </Row>
     )
   }
 }

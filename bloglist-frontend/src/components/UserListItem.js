@@ -1,19 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-
-const style = {
-  padding: '1rem',
-  borderBottom: '1px solid black'
-}
+import { Badge } from 'reactstrap'
 
 class UserListItem extends PureComponent {
-  
+
   render() {
     const { user } = this.props
-    return <div className='user-wrapper' onClick={this.onClick} style={style} >
+    return <div className='list-item' onClick={this.onClick} >
       <Link to={`/users/${user.id}`}>
-        {user.name} {user.blogs.length}
+        {user.name} <Badge pill> {user.blogs.length}</Badge>
       </Link>
     </div >
   }

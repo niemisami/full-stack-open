@@ -1,38 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Button } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import { addLike, remove, addComment } from '../actions/blogActions'
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
+import { ReactComponent as LinkIcon } from '../icons/link.svg'
+import LikeButton from './LikeButton';
+import RemoveButton from './RemoveButton';
+import { ReactComponent as Book } from '../icons/book.svg'
 
 function Blog({ blog, addLike, addComment, remove, showRemove }) {
-  return !blog
-    ? <p>Blog not found</p>
-    : (
-      <div className='reveal-1'>
-        <h1>{blog.title}</h1>
-        <a target='_blank'
-          rel='noopener noreferrer'
-          href={blog.url}>Read the blog</a>
-
-        <div className='blog-details'>
-          {blog.likes} likes <Button outline color='success' onClick={() => addLike(blog)}>Like</Button>
-          {blog.user && `Added by ${blog.user.name}`}<br />
-        </div>
-        {showRemove &&
-          <Button
-            outline
-            color='success'
-            className='remove-button'
-            onClick={() => remove(blog)}>
-            Remove
-            </Button>
+  return (
+    <Row className='reveal-1'>
+      <Col className='block' sm='12' md={{ size: 6, offset: 3 }}>
+        {!blog
+          ? <p className='reveal-1'>Blog not found</p>
+          : <>
+            <h2>
+              <Book width='22' height='22' className='svg-icon' /> {blog.title}
+            </h2>
+            <div className='blog-details'>
+              <a target='_blank'
+                rel='noopener noreferrer'
+                href={blog.url}>
+                Read the blog <LinkIcon width='22' height='22' className='svg-icon' />
+              </a>
+              <p>
+                {blog.user && `Added by ${blog.user.name}`}
+              </p>
+              <div>
+                <LikeButton likes={blog.likes} onClick={() => addLike(blog)} />
+                {showRemove &&
+                  <RemoveButton
+                    onClick={() => remove(blog)}>
+                    Remove
+                  </RemoveButton>
+                }
+              </div>
+            </div>
+            <CommentList blog={blog} />
+            <CommentForm blog={blog} />
+          </>
         }
-        <CommentList blog={blog} />
-        <CommentForm blog={blog} />
-      </div>
-    )
+      </Col>
+    </Row>
+  )
 }
 
 Blog.propTypes = {

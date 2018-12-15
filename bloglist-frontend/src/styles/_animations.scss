@@ -29,6 +29,25 @@
   }
 }
 
+@keyframes grow-down {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes shake-up-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 .reveal-1,
 .reveal-3 {
   opacity: 0;
@@ -49,4 +68,15 @@
 .reveal-down-1 {
   opacity: 0;
   animation: fade-in-down ease 0.4s forwards;
+}
+
+.reveal-delay {
+  animation-delay: 0.2s;
+}
+
+.reveal-down-2 {
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: grow-down cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s forwards;
+  animation-delay: 0.4s;
 }

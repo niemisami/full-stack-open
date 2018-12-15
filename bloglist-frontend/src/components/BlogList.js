@@ -13,10 +13,12 @@ class BlogList extends PureComponent {
   render() {
     const { blogs } = this.props
     return <>
-      <h2>Blogs</h2>
-      {blogs.map(blog =>
-        <BlogListItem key={blog.id} blog={blog} />
-      )}
+      <h2 className='reveal-down-1'>Blogs</h2>
+      <div className='reveal-1 reveal-delay'>
+        {blogs.map(blog =>
+          <BlogListItem key={blog.id} blog={blog} />
+        )}
+      </div>
     </>
   }
 
